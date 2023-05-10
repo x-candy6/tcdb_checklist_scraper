@@ -55,7 +55,9 @@ for j in player_list:
     # TODO - Fix this, it gives an out-of-bounds error
     if len(j) < 3:
         j[0] = [j[0], " ", " "]
-    print(j)
+    for i in j:
+        print(i, end=",")
+    print("")
 
 with open(set_title, mode='w', newline='') as csv_file:
     writer = csv.writer(csv_file)
