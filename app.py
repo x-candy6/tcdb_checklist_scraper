@@ -15,7 +15,6 @@ set_title = set_title.replace(" ", "_") + ".csv"
 print("Now Generating: ", set_title)
 
 # Find How many pages
-
 raw_pages = soup.find(
     "ul", {'class': 'pagination justify-content-center flex-wrap'})
 pages = len(raw_pages.find_all('a')) - 2
@@ -51,13 +50,25 @@ for page in range(1, pages + 1):
         player_row = []
 
 
-for j in player_list:
-    # TODO - Fix this, it gives an out-of-bounds error
-    if len(j) < 3:
-        j[0] = [j[0], " ", " "]
-    for i in j:
-        print(i, end=",")
-    print("")
+
+try:
+    for j in player_list:
+        # TODO - Fix this, it gives an out-of-bounds error
+        #if len(j[0]) < 3:
+        #    print(f"{j[0][0]}, line 56 check")
+            #j[0][0] = [j[0], " ", " "]
+
+        for i in j:
+            if i[0][0] == '[':
+                #print({i[0][0]}, " line61\n")
+                i[0] = i[0][0]
+
+
+            print(i, end=",")
+        print("")
+except IndexError:
+    print("\n List Has Finished Parsing")
+        
 
 with open(set_title, mode='w', newline='') as csv_file:
     writer = csv.writer(csv_file)
